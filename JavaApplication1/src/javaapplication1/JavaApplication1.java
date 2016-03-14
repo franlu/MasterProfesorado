@@ -22,48 +22,41 @@ public class JavaApplication1 {
         
         // Creando la conexión
         try {
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://www.db4free.net:3306/izv_dawm","izv_dawm","123456"); 
-        }
-        catch ( Exception e){
-            e.printStackTrace();
-        }
-        
-        /**
-        public static void createEquipo(Connection con, String DBNombre) throws SQLException {
-            String createString = "create table " + DBNombre + ".EQUIPO " +
-                                    "(TEAM_ID integer NOT NULL," +
-                                    "PRIMARY KEY (TEAM_ID))";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://www.db4free.net:3306/izv_dawm","izv_dawm","123456"); 
+            String sql = "CREATE TABLE REGISTRATION " +
+                   "(id INTEGER not NULL, " +
+                   " first VARCHAR(255), " + 
+                   " last VARCHAR(255), " + 
+                   " age INTEGER, " + 
+                   " PRIMARY KEY ( id ))"; 
+            String query = "SELECT first, last from REGISTRATION";
             
-            //Objeto para tirar sentencias a la DB
             Statement stmt = null;
             try {
                 stmt = con.createStatement();
-                stmt.executeUpdate(createString);
+                stmt.executeUpdate(sql);
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()){
+                    String first = rs.getString("first");
+                    String second = rs.getString("second");
+                    
+                }
             }
             catch (SQLException e){
                 e.printStackTrace();
             } finally {
                 stmt.close();
+                con.close();
             }
+           
         }
-        
-        public static void verEquipo(Connection con, String DBNombre) throws SQLException {
-            Statement stmt = null;
-            String query = "SELECT EQ_Nombre from " + DBNombre + ".EQUIPO";
-            try {
-                stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()){
-                    String equipo = rs.getString("EQ_Nombre");
-                    
-                }
-            } catch (SQLException e) {
-                e.printStrackTrace();
-            } finally {
-                stmt.close();
-            }
-        
-        }**/
+        catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        catch ( Exception e){
+            e.printStackTrace();
+        }
     }
     
 }
