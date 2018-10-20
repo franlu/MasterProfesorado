@@ -1,4 +1,4 @@
-# dawm
+# Master de Profesorado
 Desarrollo de aplicaciones web y multiplataforma
 
 Este repositorio fue creado como herramienta de apoyo, para mis clases de practicas del master de profesorado en el IES Zaidin-Vergeles
